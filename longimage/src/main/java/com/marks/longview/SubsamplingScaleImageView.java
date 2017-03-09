@@ -1,19 +1,3 @@
-/*
-Copyright 2013-2015 David Morrissey
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 package com.marks.longview;
 
 import android.content.ContentResolver;
@@ -105,27 +89,28 @@ public class SubsamplingScaleImageView extends View {
 
     /** Attempt to use EXIF information on the image to rotate it. Works for external files only. */
     public static final int ORIENTATION_USE_EXIF = -1;
-    /** Display the image file in its native orientation. */
+    /**不旋转*/
     public static final int ORIENTATION_0 = 0;
-    /** Rotate the image 90 degrees clockwise. */
+    /**顺时针旋转90度*/
     public static final int ORIENTATION_90 = 90;
-    /** Rotate the image 180 degrees. */
+    /** 旋转180度*/
     public static final int ORIENTATION_180 = 180;
-    /** Rotate the image 270 degrees clockwise. */
+    /** 顺时针旋转270度*/
     public static final int ORIENTATION_270 = 270;
 
     private static final List<Integer> VALID_ORIENTATIONS = Arrays.asList(ORIENTATION_0, ORIENTATION_90, ORIENTATION_180, ORIENTATION_270, ORIENTATION_USE_EXIF);
 
-    /** During zoom animation, keep the point of the image that was tapped in the same place, and scale the image around it. */
+    //缩放模式
+    /**在缩放动画期间，保持在同一位置拍摄的图像的点，并缩放其周围的图像*/
     public static final int ZOOM_FOCUS_FIXED = 1;
-    /** During zoom animation, move the point of the image that was tapped to the center of the screen. */
+    /**在缩放的动画期间，将点击的点移到屏幕中心*/
     public static final int ZOOM_FOCUS_CENTER = 2;
-    /** Zoom in to and center the tapped point immediately without animating. */
+    /** 缩放到最大，点击中心点，无动画 */
     public static final int ZOOM_FOCUS_CENTER_IMMEDIATE = 3;
 
     private static final List<Integer> VALID_ZOOM_STYLES = Arrays.asList(ZOOM_FOCUS_FIXED, ZOOM_FOCUS_CENTER, ZOOM_FOCUS_CENTER_IMMEDIATE);
 
-    /** Quadratic ease out. Not recommended for scale animation, but good for panning. */
+    /** 二次缓存，适用于平移*/
     public static final int EASE_OUT_QUAD = 1;
     /** Quadratic ease in and out. */
     public static final int EASE_IN_OUT_QUAD = 2;
@@ -2706,7 +2691,9 @@ public class SubsamplingScaleImageView extends View {
                                 }
                                 setMaxScale(10.F);
                                 setMinScale(1.0F);
-                                setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
+                                setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
+//                                setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
+//                                setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
                                 setImage(ImageSource.uri(f.getAbsolutePath()),new ImageViewState(1.0F, new PointF(0, 0), 0));
                                 int width = getWidth();
                                 int height = getHeight();

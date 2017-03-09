@@ -10,6 +10,7 @@ import java.io.OutputStream;
  */
 
 public class FileUtils {
+
     public static void CopyStream(InputStream is, OutputStream os) {
         final int buffer_size = 1024;
         try {

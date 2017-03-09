@@ -14,7 +14,7 @@ import java.io.File;
 
 /***
  * @author marks.luo
- * @Description: TODO()
+ * @Description: TODO(ImagePipeline配置)
  * @date:2017-03-08 16:53
  */
 
@@ -24,9 +24,9 @@ public class ImagePipelineConfigFactory {
     private static ImagePipelineConfig sImagePipelineConfig;
 //    private static ImagePipelineConfig sOkHttpImagePipelineConfig;
 
-    private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();
+    private static final int MAX_HEAP_SIZE = (int) Runtime.getRuntime().maxMemory();//最大内存
 
-    public static final int MAX_DISK_CACHE_SIZE = 300 * ByteConstants.MB;
+    public static final int MAX_DISK_CACHE_SIZE = 300 * ByteConstants.MB;//最大磁盘缓存
     public static final int MAX_MEMORY_CACHE_SIZE = MAX_HEAP_SIZE / 3;
 
     /**
@@ -56,7 +56,7 @@ public class ImagePipelineConfigFactory {
   }*/
 
     /**
-     * Configures disk and memory cache not to exceed common limits
+     * 将磁盘和内存缓存配置为不超过通用限制
      */
     private static void configureCaches(ImagePipelineConfig.Builder configBuilder, Context context) {
         final MemoryCacheParams bitmapCacheParams = new MemoryCacheParams(
@@ -79,6 +79,11 @@ public class ImagePipelineConfigFactory {
                         .build());
     }
 
+    /**
+     * 获取外部缓存目录
+     * @param context
+     * @return
+     */
     public static File getExternalCacheDir(final Context context) {
         if (hasExternalCacheDir())
             return context.getExternalCacheDir();

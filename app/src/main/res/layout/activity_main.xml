@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context="com.marksruo.longimageview.MainActivity">
 
-
     <com.marks.longview.SubsamplingScaleImageView
         android:id="@+id/subsamplingscale_image"
         android:layout_width="match_parent"

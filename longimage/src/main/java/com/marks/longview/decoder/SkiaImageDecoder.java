@@ -19,17 +19,24 @@ import java.util.List;
  */
 public class SkiaImageDecoder implements ImageDecoder {
 
-    private static final String FILE_PREFIX = "file://";
-    private static final String ASSET_PREFIX = FILE_PREFIX + "/android_asset/";
-    private static final String RESOURCE_PREFIX = ContentResolver.SCHEME_ANDROID_RESOURCE + "://";
+    private static final String FILE_PREFIX = "file://";//文件
+    private static final String ASSET_PREFIX = FILE_PREFIX + "/android_asset/";//资源
+    private static final String RESOURCE_PREFIX = ContentResolver.SCHEME_ANDROID_RESOURCE + "://";//资源前缀
 
+    /***
+     * 解码图像
+     * @param context Application context. A reference may be held, but must be cleared on recycle.
+     * @param uri URI of the image.
+     * @return
+     * @throws Exception
+     */
     @Override
     public Bitmap decode(Context context, Uri uri) throws Exception {
         String uriString = uri.toString();
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap bitmap;
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
-        if (uriString.startsWith(RESOURCE_PREFIX)) {
+        options.inPreferredConfig = Bitmap.Config.RGB_565;//设置解码图像格式
+        if (uriString.startsWith(RESOURCE_PREFIX)) {//判断是否为Drawable目录下文件
             Resources res;
             String packageName = uri.getAuthority();
             if (context.getPackageName().equals(packageName)) {

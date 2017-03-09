@@ -6,14 +6,14 @@ import java.io.File;
 
 /***
  * @author marks.luo
- * @Description: TODO()
+ * @Description: TODO(文件缓存)
  * @date:2017-03-08 16:37
  */
 public class FileCache {
     private File cacheDir;
 
     public FileCache(Context context) {
-        //Find the dir to save cached images
+        //找到缓存图像的目录
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
             cacheDir = new File(android.os.Environment.getExternalStorageDirectory(), "fresco_cache");
         } else {

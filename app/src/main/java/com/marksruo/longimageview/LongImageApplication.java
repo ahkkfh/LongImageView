@@ -12,7 +12,6 @@ import com.marks.longview.ImagePipelineConfigFactory;
  */
 
 public class LongImageApplication extends Application {
-
     @Override
     public void onCreate() {
         super.onCreate();

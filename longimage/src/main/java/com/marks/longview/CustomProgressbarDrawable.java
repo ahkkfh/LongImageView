@@ -6,12 +6,12 @@ import android.graphics.drawable.Drawable;
 
 /***
  * @author marks.luo
- * @Description: TODO()
+ * @Description: TODO(自定义进度条)
  * @date:2017-03-08 16:41
  */
-
 public class CustomProgressbarDrawable extends Drawable {
-    private ImageDownloadListener mListener;
+
+    private ImageDownloadListener mListener;//图片下载监听器
 
     public CustomProgressbarDrawable(ImageDownloadListener listener) {
         mListener = listener;
@@ -32,7 +32,7 @@ public class CustomProgressbarDrawable extends Drawable {
 
     }
 
-    @Override
+    @Override//获取不透明度
     public int getOpacity() {
         return 0;
     }

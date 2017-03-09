@@ -43,7 +43,7 @@ public interface ImageRegionDecoder {
     boolean isReady();
 
     /**
-     * This method will be called when the decoder is no longer required. It should clean up any resources still in use.
+     * 解码器释放，不再需要解码器时，调用此方法，它应该清理仍在使用的任何资源
      */
     void recycle();
 

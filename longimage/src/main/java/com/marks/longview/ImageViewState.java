@@ -26,12 +26,11 @@ import java.io.Serializable;
 public class ImageViewState implements Serializable {
 
     private float scale;
-
+    /**中心x和y点*/
     private float centerX;
-
     private float centerY;
 
-    private int orientation;
+    private int orientation;//方向
 
     public ImageViewState(float scale, PointF center, int orientation) {
         this.scale = scale;

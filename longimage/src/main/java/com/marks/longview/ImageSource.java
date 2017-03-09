@@ -18,7 +18,7 @@ public final class ImageSource {
 
     private final Uri uri;
     private final Bitmap bitmap;
-    private final Integer resource;
+    private final Integer resource;//资源id
     private boolean tile;
     private int sWidth;
     private int sHeight;
@@ -49,6 +49,7 @@ public final class ImageSource {
 
     /**
      * Create an instance from a resource. The correct resource for the device screen resolution will be used.
+     * 根据资源id创建实例
      * @param resId resource ID.
      */
     public static ImageSource resource(int resId) {
@@ -56,8 +57,8 @@ public final class ImageSource {
     }
 
     /**
-     * Create an instance from an asset name.
-     * @param assetName asset name.
+     * 根据资产创建实例
+     * @param assetName asset name.（资产名）
      */
     public static ImageSource asset(String assetName) {
         if (assetName == null) {
@@ -67,8 +68,7 @@ public final class ImageSource {
     }
 
     /**
-     * Create an instance from a URI. If the URI does not start with a scheme, it's assumed to be the URI
-     * of a file.
+     * 根据uri创建实例，如果不是以uri开始，则假定是file的uri
      * @param uri image URI.
      */
     public static ImageSource uri(String uri) {
@@ -96,7 +96,7 @@ public final class ImageSource {
     }
 
     /**
-     * Provide a loaded bitmap for display.
+     * 提供加载的位图用于显示
      * @param bitmap bitmap to be displayed.
      */
     public static ImageSource bitmap(Bitmap bitmap) {
