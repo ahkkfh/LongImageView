@@ -5,6 +5,7 @@ package com.marks.longview.decoder;
  * @param <T> the class of decoder that will be produced.
  */
 public interface DecoderFactory<T> {
+
   /**
    * Produce a new instance of a decoder with type {@link T}.
    * @return a new instance of your decoder.
