@@ -6,10 +6,10 @@
     方式一：
         拷贝longimage中的文件到你自定义路径下，然后自定义Application，设置Fresco的初始化，在xml中使用
         SubsamplingScaleImageView,在Activity中获取该控件，调用setImageUri方法传入uri地址即可。
-        ![拷贝文件](./image/file.png)
-        ![自定义Application](./image/longApplication.png)
-        ![xml中使用](./image/long_xml.png)
-        ![activity中设置地址](./image/long_activity.png)
+ ![](./image/file.png)
+ ![自定义Application](./image/longApplication.png)
+ ![xml中使用](./image/long_xml.png)
+ ![activity中设置地址](./image/long_activity.png)
 
         
 #注意事项
