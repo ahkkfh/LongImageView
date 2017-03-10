@@ -1,6 +1,5 @@
 package com.marks.longview.decoder;
 
-import android.support.annotation.NonNull;
 
 /**
  * Compatibility factory to instantiate decoders with empty public constructors.
@@ -11,7 +10,7 @@ public class CompatDecoderFactory <T> implements DecoderFactory<T> {
 
   private Class<? extends T> clazz;
 
-  public CompatDecoderFactory(@NonNull Class<? extends T> clazz) {
+  public CompatDecoderFactory(Class<? extends T> clazz) {
     this.clazz = clazz;
   }
 

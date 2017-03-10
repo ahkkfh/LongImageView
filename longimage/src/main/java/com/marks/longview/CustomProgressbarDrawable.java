@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 
 /***
  * @author marks.luo
- * @Description: TODO(自定义进度条)
+ * @Description: TODO()
  * @date:2017-03-08 16:41
  */
 public class CustomProgressbarDrawable extends Drawable {

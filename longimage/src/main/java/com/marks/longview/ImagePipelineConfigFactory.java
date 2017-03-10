@@ -3,13 +3,11 @@ package com.marks.longview;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.ByteConstants;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-
 import java.io.File;
 
 /***

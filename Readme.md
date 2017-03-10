@@ -4,6 +4,8 @@
     
 #使用说明
     方式一：
+        直接使用 compile 'com.marks.longview:longimage:1.0.0' 引入依赖库
+    方式二：
         拷贝longimage中的文件到你自定义路径下，然后自定义Application，设置Fresco的初始化，在xml中使用
         SubsamplingScaleImageView,在Activity中获取该控件，调用setImageUri方法传入uri地址即可。
  ![](./image/file.png)
@@ -11,15 +13,16 @@
  ![xml中使用](./image/long_xml.png)
  ![activity中设置地址](./image/long_activity.png)
 
-        
+    
 #注意事项
     该项目中使用了Fresco等图片加载框架，所以如果需要混淆，请自行填加。
  
 #更新日志
-     1.0.0
-       结合[Subsampling Scale Image View](https://github.com/davemorrissey/subsampling-scale-image-view)
-       和Fresco 实现长图的加载
+######1.0.1
+[Subsampling Scale Image View](https://github.com/davemorrissey/subsampling-scale-image-view) 和Fresco 实现长图的加载
 
 
 #联系方式
    Email:markruo92@gmail.com  
+   
+  

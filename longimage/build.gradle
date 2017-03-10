@@ -1,9 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin:  'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+//这个Version是用于区分library版本的，当我们需要更新library包的时记得修改该version
+version ="1.0.0"
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
+    resourcePrefix "marks"//资源前缀
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
@@ -30,4 +35,87 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.5.2'//Fresco 图片加载框架
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+}
+
+def siteUrl='https://github.com/ahkkfh/LongImageView'//项目主页
+def gitUrl='git@github.com:ahkkfh/LongImageView.git'//git创库的url
+group="com.marks.longview"//Maven Group ID for the artifact,一般是唯一包名
+install{
+    repositories.mavenInstaller{
+        //这里使用参数生成pom.xml
+        pom{
+            project{
+                packaging 'aar'
+                //Add your description here(添加项目说明)
+                name  "该项目为处理长图展示的问题，主要使用Fresco和SubsamplingScaleImageView 来实现长图的加载，后期会加入Glide加载长图的功能。"
+                url siteUrl
+                //设置许可证
+                licenses{
+                    license{
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers{
+                    developer{
+                        id 'ahkkfh'        //填写的一些基本信息
+                        name 'mark.Ruo'
+                        email 'markruo92@gmail.com  '
+                    }
+                }
+                scm {//设置连接地址
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type:Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+//task javadoc(type: Javadoc){
+//    options.encoding='utf-8'//设置javadoc的编码格式
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//javadoc{
+//    options{
+//        encoding 'UTF-8'
+//        charSet  'UTF-8'
+//    }
+//}
+//tasks.withType(Javadoc){
+//    options.addStringOption('Xdoclint:none', '-quiet')
+//    options.addStringOption('encoding', 'UTF-8')
+//    options.addStringOption('charSet', 'UTF-8')
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc){
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+
+artifacts {
+//    archives javadocJar
+    archives sourcesJar
+}
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray{
+    user=properties.getProperty("bintray.user")
+    key =properties.getProperty("bintray.apikey")
+    configurations=['archives']
+    pkg{
+        repo = "maven"
+        name = "LongImageView"    //发布到JCenter上的项目名字
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
 }
