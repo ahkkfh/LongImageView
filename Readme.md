@@ -18,6 +18,20 @@
     该项目中使用了Fresco等图片加载框架，所以如果需要混淆，请自行填加。
  
 #更新日志
+######1.0.2
+    项目添加Glide加载方式:
+     public void setImageUriByGlide(String url){
+            setMaxScale(10.0F);
+            setMinScale(1.0F);
+            setMinimumScaleType(getImageType());
+            Glide.with(this.getContext()).load(url).downloadOnly(new SimpleTarget<File>() {
+                @Override
+                public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+                    setImage(ImageSource.uri(Uri.fromFile(resource)),new ImageViewState(1.0F,new PointF(0,0),0));
+                }
+            });
+        }    
+        
 ######1.0.1
 [Subsampling Scale Image View](https://github.com/davemorrissey/subsampling-scale-image-view) 和Fresco 实现长图的加载
 

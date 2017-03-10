@@ -31,6 +31,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -287,6 +290,8 @@ public class SubsamplingScaleImageView extends View {
     private RectF sRect;
     private float[] srcArray = new float[8];
     private float[] dstArray = new float[8];
+
+    private int imageType=0;//图片的格式
 
     public SubsamplingScaleImageView(Context context, AttributeSet attr, int defStyle) {
         super(context, attr, defStyle);
@@ -2791,7 +2796,8 @@ public class SubsamplingScaleImageView extends View {
                                 }
                                 setMaxScale(10.F);
                                 setMinScale(1.0F);
-                                setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
+//                                setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
+                                setMinimumScaleType(getImageType());
                                 setImage(ImageSource.uri(f.getAbsolutePath()), new ImageViewState(1.0F, new PointF(0, 0), 0));
                                 int width = getWidth();
                                 int height = getHeight();
@@ -2837,8 +2843,10 @@ public class SubsamplingScaleImageView extends View {
                                     CloseableStaticBitmap closeableStaticBitmap = (CloseableStaticBitmap) image;
                                     Bitmap bitmap = closeableStaticBitmap.getUnderlyingBitmap();
                                     if (bitmap != null) {
+                                        setMaxScale(10.F);
+                                        setMinScale(1.0F);
+                                        setMinimumScaleType(getImageType());
                                         setImage(ImageSource.bitmap(bitmap), new ImageViewState(1.0F, new PointF(0, 0), 0));
-                                        setMaxScale(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
                                         int width = getWidth();
                                         int height = getHeight();
                                         if (width == 0 || height == 0) {
@@ -2864,4 +2872,29 @@ public class SubsamplingScaleImageView extends View {
         mDraweeHolder.setController(controller);
     }
 
+
+    public void setImageUriByGlide(String url){
+        setMaxScale(10.0F);
+        setMinScale(1.0F);
+        setMinimumScaleType(getImageType());
+        Glide.with(this.getContext()).load(url).downloadOnly(new SimpleTarget<File>() {
+            @Override
+            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+                setImage(ImageSource.uri(Uri.fromFile(resource)),new ImageViewState(1.0F,new PointF(0,0),0));
+            }
+        });
+    }
+
+
+    /***
+     * 设置显示图片的类型，长图设置SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP， 正常显示设置SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE
+     * @param imageType
+     */
+    public void setImageType(int imageType){
+        this.imageType=imageType;
+    }
+
+    public int getImageType(){
+        return 0==imageType?SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE:imageType;
+    }
 }
