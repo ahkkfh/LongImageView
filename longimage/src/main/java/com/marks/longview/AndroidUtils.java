@@ -23,11 +23,21 @@ public class AndroidUtils {
         }
     }
 
+    /***
+     * 获取屏幕宽
+     * @param context
+     * @return
+     */
     public static int getScreenWidth(Context context) {
         getDisplay(context);
         return width;
     }
 
+    /***
+     * 获取屏幕高
+     * @param context
+     * @return
+     */
     public static int getScreenHeight(Context context) {
         getDisplay(context);
         return height;

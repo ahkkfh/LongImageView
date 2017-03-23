@@ -32,8 +32,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.2.0'//v7的支持库
-    compile 'com.facebook.fresco:fresco:0.5.2'//Fresco 图片加载框架
-    compile 'com.github.bumptech.glide:glide:3.7.0'//glide图片加载框架
+    compile 'com.facebook.fresco:fresco:0.13.0'//Fresco 图片加载框架
+    // 支持 GIF 动图，需要添加
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.7'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'//glide图片加载框架
 //    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }

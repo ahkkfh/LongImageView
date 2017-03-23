@@ -63,6 +63,11 @@ public class ImagePipelineConfigFactory {
                 MAX_MEMORY_CACHE_SIZE, // Max total size of elements in eviction queue
                 Integer.MAX_VALUE,                     // Max length of eviction queue
                 Integer.MAX_VALUE);                    // Max cache entry size
+        DiskCacheConfig cacheConfig=DiskCacheConfig.newBuilder(context)
+                .setBaseDirectoryPath(getExternalCacheDir(context))
+                .setBaseDirectoryName(IMAGE_PIPELINE_CACHE_DIR)
+                .setMaxCacheSize(MAX_DISK_CACHE_SIZE)
+                .build();
         configBuilder
                 .setBitmapMemoryCacheParamsSupplier(
                         new Supplier<MemoryCacheParams>() {
@@ -70,11 +75,7 @@ public class ImagePipelineConfigFactory {
                                 return bitmapCacheParams;
                             }
                         })
-                .setMainDiskCacheConfig(DiskCacheConfig.newBuilder()
-                        .setBaseDirectoryPath(getExternalCacheDir(context))
-                        .setBaseDirectoryName(IMAGE_PIPELINE_CACHE_DIR)
-                        .setMaxCacheSize(MAX_DISK_CACHE_SIZE)
-                        .build());
+                .setMainDiskCacheConfig(cacheConfig);
     }
 
     /**

@@ -70,7 +70,7 @@ public class SkiaImageDecoder implements ImageDecoder {
             bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri), null, options);
         }
         if (bitmap == null) {
-            throw new RuntimeException("Skia image region decoder returned null bitmap - image format may not be supported");
+            throw new RuntimeException("图像区域解码器返回null，可能不支持该格式");
         }
         return bitmap;
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.marksruo.longimageview">
+          package="com.marksruo.longimageview">
     <!--网络权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--外部文件编写权限-->
@@ -16,11 +16,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".LongImageActivity"/>
+        <activity android:name=".ShowImageActivity"/>
+        <activity android:name=".ImageViewActivity"/>
+        <activity android:name=".ViewPagerActivity"/>
     </application>
 
 </manifest>

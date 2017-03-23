@@ -1,12 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.marksruo.longimageview.MainActivity">
+<layout>
 
-    <com.marks.longview.SubsamplingScaleImageView
-        android:id="@+id/subsamplingscale_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+    <data/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context="com.marksruo.longimageview.MainActivity">
+
+        <Button
+            android:id="@+id/long_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="longclick"
+            android:text="显示长图"/>
+
+        <Button
+            android:id="@+id/show_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/long_click"
+            android:onClick="viewclick"
+            android:text="显示未缩放长图"/>
+
+        <Button
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/show_view"
+            android:onClick="viewclick"
+            android:text="显示正常图"/>
+
+        <Button
+            android:id="@+id/show_view_pager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_view"
+            android:onClick="viewclick"
+            android:text="显示ViewPager"/>
+
+        <com.marks.longview.SubsamplingScaleImageView
+            android:id="@+id/thumbnails_image"
+            android:layout_width="70dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/image_view"
+            android:layout_centerInParent="true"/>
+
+        <com.marks.longview.SubsamplingScaleImageView
+            android:id="@+id/thumbnails_image_view"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/thumbnails_image"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</layout>

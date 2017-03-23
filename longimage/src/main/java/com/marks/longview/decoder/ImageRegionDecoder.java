@@ -9,6 +9,7 @@ import android.net.Uri;
 /**
  * Interface for image decoding classes, allowing the default {@link android.graphics.BitmapRegionDecoder}
  * based on the Skia library to be replaced with a custom class.
+ * 图像区域解码器
  */
 public interface ImageRegionDecoder {
 

@@ -3,6 +3,9 @@ package com.marks.longview;
 import android.content.Context;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /***
  * @author marks.luo
@@ -44,6 +47,27 @@ public class FileCache {
         }
         for (File f : files) {
             f.delete();
+        }
+    }
+
+    /***
+     * 复制文件
+     * @param inputStream
+     * @param outputStream
+     */
+    public static void CopyStream(InputStream inputStream, OutputStream outputStream) {
+        final int buffer_size = 1024;
+        byte[] bytes = new byte[buffer_size];
+        for (; ; ) {
+            try {
+                int count = inputStream.read(bytes, 0, buffer_size);
+                if (count == -1) {
+                    break;
+                }
+                outputStream.write(bytes, 0, count);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

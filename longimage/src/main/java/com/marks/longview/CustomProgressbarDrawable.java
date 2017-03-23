@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 
 /***
  * @author marks.luo
- * @Description: TODO()
+ * @Description: TODO(自定义进度条)
  * @date:2017-03-08 16:41
  */
 public class CustomProgressbarDrawable extends Drawable {
@@ -19,17 +19,14 @@ public class CustomProgressbarDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-
     }
 
     @Override
     public void setAlpha(int alpha) {
-
     }
 
     @Override
     public void setColorFilter(ColorFilter cf) {
-
     }
 
     @Override//获取不透明度
