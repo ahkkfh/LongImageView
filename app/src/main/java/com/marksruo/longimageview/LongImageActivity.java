@@ -13,7 +13,8 @@ import com.marksruo.longimageview.databinding.ActivityLongBinding;
  * @date:2017-03-14 09:45
  */
 public class LongImageActivity extends BaseActivity {
-    private String url = "http://ww3.sinaimg.cn/bmiddle/a20a9b80jw1etmbognz7rj20cs3jiqa6.jpg";//长图
+    private String url = "http://opposns-test.oss-cn-shenzhen.aliyuncs.com/uploads/thread/attachment/2017/05/10/14943982461604.png";//长图
+//    private String url = "http://ww3.sinaimg.cn/bmiddle/a20a9b80jw1etmbognz7rj20cs3jiqa6.jpg";//长图
     private ActivityLongBinding binding;
 
     @Override

@@ -40,18 +40,29 @@
             android:onClick="viewclick"
             android:text="显示ViewPager"/>
 
+
         <com.marks.longview.SubsamplingScaleImageView
             android:id="@+id/thumbnails_image"
             android:layout_width="70dp"
             android:layout_height="150dp"
             android:layout_below="@+id/image_view"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
 
         <com.marks.longview.SubsamplingScaleImageView
             android:id="@+id/thumbnails_image_view"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_below="@+id/thumbnails_image"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"/>
     </RelativeLayout>
 </layout>

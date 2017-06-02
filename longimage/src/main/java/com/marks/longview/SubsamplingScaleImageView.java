@@ -43,6 +43,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeHolder;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.image.CloseableImage;
@@ -87,7 +88,7 @@ import java.util.concurrent.Executor;
  * s prefixes - coordinates, translations and distances measured in source image pixels (scaled)
  */
 @SuppressWarnings("unused")
-public class SubsamplingScaleImageView extends View {
+public class SubsamplingScaleImageView extends /*View*/ SimpleDraweeView {
 
     private static final String TAG = SubsamplingScaleImageView.class.getSimpleName();
 
@@ -336,14 +337,16 @@ public class SubsamplingScaleImageView extends View {
     DraweeHolder<GenericDraweeHierarchy> mDraweeHolder;
     private CloseableReference<CloseableImage> imageReference = null;
     private CloseableReference<PooledByteBuffer> bytes;
+    private Context mContext;
 
     public SubsamplingScaleImageView(Context context, AttributeSet attr) {
         super(context, attr);
+        this.mContext = context;
         density = getResources().getDisplayMetrics().density;
         if (mDraweeHolder == null) {
-            GenericDraweeHierarchyBuilder builder=new GenericDraweeHierarchyBuilder(getResources());
-            GenericDraweeHierarchy hierarchy=builder.setProgressBarImage(new CustomProgressbarDrawable(null)).build();
-            mDraweeHolder=DraweeHolder.create(hierarchy,getContext());
+            GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(getResources());
+            GenericDraweeHierarchy hierarchy = builder.setProgressBarImage(new CustomProgressbarDrawable(null)).build();
+            mDraweeHolder = DraweeHolder.create(hierarchy, getContext());
         }
 
         setMinimumDpi(160);
@@ -3170,6 +3173,7 @@ public class SubsamplingScaleImageView extends View {
         mDraweeHolder.onAttach();
         super.onAttachedToWindow();
     }
+
     @Override
     protected boolean verifyDrawable(Drawable dr) {
         if (dr == mDraweeHolder.getHierarchy().getTopLevelDrawable()) {
@@ -3194,7 +3198,7 @@ public class SubsamplingScaleImageView extends View {
         ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(url)).build();
         ImagePipeline imagePipeline = Fresco.getImagePipeline();
         final DataSource<CloseableReference<PooledByteBuffer>> dataSource = imagePipeline.fetchEncodedImage(imageRequest, this);
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
+        final DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setOldController(mDraweeHolder.getController())
                 .setImageRequest(imageRequest)
                 .setControllerListener(new BaseControllerListener<ImageInfo>() {
@@ -3215,6 +3219,16 @@ public class SubsamplingScaleImageView extends View {
                                     FileCache.CopyStream(bis, os);
                                 } catch (IOException e) {
                                     e.printStackTrace();
+                                }
+
+                                if (imageInfo.getWidth() <= AndroidUtils.getScreenWidth(mContext)) {
+                                    setImage(ImageSource.uri(f.getAbsolutePath()), new ImageViewState(1.0F, new PointF(0, 0), 0));
+                                    setMinScale(1.0F);
+                                    setMaxScale(10.0F);
+                                    setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
+                                } else {
+                                    setImage(ImageSource.uri(f.getAbsolutePath()));
+                                    setMaxScale(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
                                 }
                                 setMaxScale(10.0F);
                                 setMinScale(1.0F);
