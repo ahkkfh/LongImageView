@@ -6,6 +6,8 @@ import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -59,6 +61,19 @@ public class ImageViewActivity extends AppCompatActivity {
         showLongPhoto(Uri.parse(uri));
     }
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    binding.image.setImage(ImageSource.uri((String) msg.obj), new ImageViewState(1.0F, new PointF(0, 0), 0));
+                    binding.imageLoading.setVisibility(View.GONE);
+                    Log.i("lbxx", "加载图片");
+                    break;
+            }
+        }
+    };
 
     public void showLongPhoto(final Uri url) {
         ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(url).setProgressiveRenderingEnabled(true).build();
@@ -78,19 +93,24 @@ public class ImageViewActivity extends AppCompatActivity {
                 }
                 String fileName = String.valueOf(uri.hashCode()) + ".jpg";
                 File file = new File(appDir, fileName);
+                String path = file.getAbsolutePath();
                 try {
                     FileOutputStream fos = new FileOutputStream(file);
                     assert bitmap != null;
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    Log.i("lbxx", "file.path==" + file.getAbsolutePath());
                     fos.flush();
+                    Log.i("lbxx", "file.path==" + file.getAbsolutePath());
                     fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                binding.image.setImage(ImageSource.uri(file.getAbsolutePath()), new ImageViewState(1.0F, new PointF(0, 0), 0));
-                Log.i("lbxx", "加载图片");
-                binding.imageLoading.setVisibility(View.GONE);
+                Message msg = new Message();
+                msg.what = 1;
+                msg.obj = path;
+                mHandler.sendMessage(msg);
+                Log.i("lbxx", "handler.sendMessage");
+//                binding.image.setImage(ImageSource.uri(file.getAbsolutePath()), new ImageViewState(1.0F, new PointF(0, 0), 0));
+//                binding.imageLoading.setVisibility(View.GONE);
             }
 
             @Override
@@ -100,8 +120,5 @@ public class ImageViewActivity extends AppCompatActivity {
                 binding.imageLoading.setVisibility(View.GONE);
             }
         }, CallerThreadExecutor.getInstance());
-//        CacheKey cacheKey = DefaultCacheKeyFactory.getInstance().getEncodedCacheKey(ImageRequest.fromUri(url), this);
-//        File cacheFile = FrescoUtils.getCachedImageOnDisk(cacheKey);
-//        Log.i("lbxx", "cacheFile==null:" + (cacheFile == null) + "==path==" + cacheFile.getAbsolutePath());
     }
 }
