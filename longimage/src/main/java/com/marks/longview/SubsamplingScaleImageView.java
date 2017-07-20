@@ -43,7 +43,6 @@ import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeHolder;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.image.CloseableImage;
@@ -88,7 +87,7 @@ import java.util.concurrent.Executor;
  * s prefixes - coordinates, translations and distances measured in source image pixels (scaled)
  */
 @SuppressWarnings("unused")
-public class SubsamplingScaleImageView extends /*View*/ SimpleDraweeView {
+public class SubsamplingScaleImageView extends View  {
 
     private static final String TAG = SubsamplingScaleImageView.class.getSimpleName();
 
@@ -3380,6 +3379,6 @@ public class SubsamplingScaleImageView extends /*View*/ SimpleDraweeView {
     }
 
     public int getImageType() {
-        return 0 == imageType ? SubsamplingScaleImageView1.SCALE_TYPE_CENTER_INSIDE : imageType;
+        return 0 == imageType ? SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE : imageType;
     }
 }

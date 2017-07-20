@@ -6,7 +6,7 @@ import android.view.WindowManager;
 
 /***
  * @author marks.luo
- * @Description: TODO(android中帮助类，用于宽和高)
+ * @Description: (android中帮助类，用于宽和高)
  * @date:2017-03-08 16:36
  */
 public class AndroidUtils {
